@@ -4,7 +4,7 @@ import (
 	listPkg "container/list"
 )
 
-// union find data structure.
+// UnionFind data structure.
 type UnionFind map[interface{}]*listPkg.List
 
 // New return a new UnionFind instance.
