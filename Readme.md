@@ -1,12 +1,12 @@
 # union\_find
 a union find data structure based on map and list in golang.
 
-[![Build Status](https://travis-ci.org/bughou/union_find.svg?branch=master)](https://travis-ci.org/bughou/union_find)
-[![Go Report Card](https://goreportcard.com/badge/github.com/bughou/union_find)](https://goreportcard.com/report/github.com/bughou/union_find)
-[![Coverage Status](https://coveralls.io/repos/github/bughou/union_find/badge.svg?branch=master)](https://coveralls.io/github/bughou/union_find?branch=master)
+[![Build Status](https://travis-ci.org/lovego/union_find.svg?branch=master)](https://travis-ci.org/lovego/union_find)
+[![Go Report Card](https://goreportcard.com/badge/github.com/lovego/union_find)](https://goreportcard.com/report/github.com/lovego/union_find)
+[![Coverage Status](https://coveralls.io/repos/github/lovego/union_find/badge.svg?branch=master)](https://coveralls.io/github/lovego/union_find?branch=master)
 
 ## Install
-`$ go get github.com/bughou/union_find`
+`$ go get github.com/lovego/union_find`
 
 ## Usage
 ```go
