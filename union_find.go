@@ -4,13 +4,15 @@ import (
 	listPkg "container/list"
 )
 
+// union find data structure.
 type UnionFind map[interface{}]*listPkg.List
 
+// New return a new UnionFind instance.
 func New() UnionFind {
 	return make(UnionFind)
 }
 
-// union objects into the same set, including the existing set members of objects
+// Union objects into the same set, including the existing set members of objects
 func (uf UnionFind) Union(objects ...interface{}) {
 	for i := 1; i < len(objects); i++ {
 		uf.union(objects[i-1], objects[i])
@@ -34,7 +36,7 @@ func (uf UnionFind) union(a, b interface{}) {
 	case la != lb:
 		uf.concat(la, lb)
 	default:
-		// la == lb, so a and b is aready in the same sets.
+		// la == lb, so a and b is already in the same sets.
 	}
 }
 
@@ -56,7 +58,7 @@ func (uf UnionFind) concat(la, lb *listPkg.List) {
 	}
 }
 
-// check if a and b are in the same set
+// InSameSet check if a and b are in the same set
 func (uf UnionFind) InSameSet(a, b interface{}) bool {
 	la := uf[a]
 	if la == nil {
@@ -69,7 +71,7 @@ func (uf UnionFind) InSameSet(a, b interface{}) bool {
 	return la == lb
 }
 
-// find all set members of object
+// Find all set members of object
 func (uf UnionFind) Find(object interface{}) (result []interface{}) {
 	list := uf[object]
 	if list == nil {
