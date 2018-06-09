@@ -35,7 +35,7 @@ func TestInts1(t *testing.T) {
 	checkValid(t, uf, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100)
 
 	if uf.InSameSet(100, 101) {
-		t.Fatalf("unexpectd InSameSet(%v, %v): true\n%s", errs.Stack(2))
+		t.Fatalf("unexpectd InSameSet(100, 101): true\n%s", errs.Stack(2))
 	}
 }
 
