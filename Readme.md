@@ -3,6 +3,7 @@ a union find data structure based on map and list in golang.
 
 [![Build Status](https://travis-ci.org/bughou/union_find.svg?branch=master)](https://travis-ci.org/bughou/union_find)
 [![Go Report Card](https://goreportcard.com/badge/github.com/bughou/union_find)](https://goreportcard.com/report/github.com/bughou/union_find)
+[![Coverage Status](https://coveralls.io/repos/github/bughou/union_find/badge.svg?branch=master)](https://coveralls.io/github/bughou/union_find?branch=master)
 
 ## Install
 `$ go get github.com/bughou/union_find`
