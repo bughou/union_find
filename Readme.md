@@ -4,6 +4,7 @@ a union find data structure based on map and list in golang.
 [![Build Status](https://travis-ci.org/lovego/union_find.svg?branch=master)](https://travis-ci.org/lovego/union_find)
 [![Go Report Card](https://goreportcard.com/badge/github.com/lovego/union_find)](https://goreportcard.com/report/github.com/lovego/union_find)
 [![Coverage Status](https://coveralls.io/repos/github/lovego/union_find/badge.svg?branch=master)](https://coveralls.io/github/lovego/union_find?branch=master)
+[![GoDoc](https://godoc.org/github.com/lovego/union_find?status.svg)](https://godoc.org/github.com/lovego/union_find)
 
 ## Install
 `$ go get github.com/lovego/union_find`
@@ -44,3 +45,6 @@ fmt.Println(uf.InSameSet(1, 4)) // Prints true
 fmt.Println(uf.InSameSet(1, 5)) // Prints true
 fmt.Println(uf.InSameSet(2, 6)) // Prints true
 ```
+
+## Documentation
+[https://godoc.org/github.com/lovego/union_find](https://godoc.org/github.com/lovego/union_find)
