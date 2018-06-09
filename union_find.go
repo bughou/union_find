@@ -21,15 +21,10 @@ func (uf UnionFind) union(a, b interface{}) {
 	if a == b {
 		return
 	}
-	la := uf[a]
-	lb := uf[b]
+	la, lb := uf[a], uf[b]
 	switch {
 	case la == nil && lb == nil:
-		list := listPkg.New()
-		list.PushBack(a)
-		list.PushBack(b)
-		uf[a] = list
-		uf[b] = list
+		uf.init(a, b)
 	case la != nil && lb == nil:
 		la.PushBack(b)
 		uf[b] = la
@@ -37,8 +32,27 @@ func (uf UnionFind) union(a, b interface{}) {
 		lb.PushBack(a)
 		uf[a] = lb
 	case la != lb:
+		uf.concat(la, lb)
 	default:
 		// la == lb, so a and b is aready in the same sets.
+	}
+}
+
+func (uf UnionFind) init(a, b interface{}) {
+	list := listPkg.New()
+	list.PushBack(a)
+	list.PushBack(b)
+	uf[a] = list
+	uf[b] = list
+}
+
+func (uf UnionFind) concat(la, lb *listPkg.List) {
+	if la.Len() < lb.Len() {
+		la, lb = lb, la
+	}
+	for b := lb.Front(); b != nil; b = b.Next() {
+		la.PushBack(b.Value)
+		uf[b.Value] = la
 	}
 }
 
