@@ -45,6 +45,9 @@ fmt.Println(uf.Find(1, 6)) // Prints [1, 2, 3, 4, 5, 6]
 fmt.Println(uf.InSameSet(1, 4)) // Prints true
 fmt.Println(uf.InSameSet(1, 5)) // Prints true
 fmt.Println(uf.InSameSet(2, 6)) // Prints true
+
+fmt.Println(uf.RemoveSet(1)) // Prints [1, 2, 3, 4, 5, 6]
+fmt.Println(uf.Find(3))      // Prints [ ]
 ```
 
 ## Documentation
