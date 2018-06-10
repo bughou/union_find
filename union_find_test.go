@@ -32,11 +32,20 @@ func TestInts1(t *testing.T) {
 	checkValid(t, uf, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 
 	uf.Union(100, 1)
-	checkValid(t, uf, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100)
+	expect := []interface{}{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 100}
+	checkValid(t, uf, expect...)
 
 	if uf.InSameSet(100, 101) {
 		t.Fatalf("unexpectd InSameSet(100, 101): true\n%s", errs.Stack(2))
 	}
+
+	if got := uf.RemoveSet(101); got != nil {
+		t.Fatalf("unexpectd RemoveSet(101): %v\n%s", got, errs.Stack(2))
+	}
+	if got := uf.RemoveSet(100); !reflect.DeepEqual(got, expect) {
+		t.Fatalf("unexpectd RemoveSet(100): %v\n%s", got, errs.Stack(2))
+	}
+	checkInvalid(t, uf, expect...)
 }
 
 func TestInts2(t *testing.T) {
@@ -66,12 +75,12 @@ func TestIntsDuplicae(t *testing.T) {
 	checkValid(t, uf, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
 }
 
-func testUnionFind(t *testing.T, uf UnionFind, values ...interface{}) {
+func testUnionFind(t *testing.T, uf UnionFindSets, values ...interface{}) {
 	uf.Union(values...)
 	checkValid(t, uf, values...)
 }
 
-func checkValid(t *testing.T, uf UnionFind, values ...interface{}) {
+func checkValid(t *testing.T, uf UnionFindSets, values ...interface{}) {
 	for _, v := range values {
 		got := uf.Find(v)
 		if !reflect.DeepEqual(got, values) {
@@ -91,7 +100,7 @@ func checkValid(t *testing.T, uf UnionFind, values ...interface{}) {
 	}
 }
 
-func checkInvalid(t *testing.T, uf UnionFind, values ...interface{}) {
+func checkInvalid(t *testing.T, uf UnionFindSets, values ...interface{}) {
 	for _, v := range values {
 		got := uf.Find(v)
 		if got != nil {
