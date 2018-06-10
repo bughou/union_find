@@ -78,6 +78,11 @@ func checkValid(t *testing.T, uf UnionFind, values ...interface{}) {
 			t.Fatalf("unexpectd Find(%v): %v\n%s", v, got, errs.Stack(2))
 		}
 	}
+	got := uf.Find(values...)
+	if !reflect.DeepEqual(got, values) {
+		t.Fatalf("unexpectd Find(%v...): %v\n%s", values, got, errs.Stack(2))
+	}
+
 	for i := 1; i < len(values); i++ {
 		if !uf.InSameSet(values[i-1], values[i]) {
 			t.Fatalf("unexpectd InSameSet(%v, %v): false\n%s", values[i-1], values[i],
@@ -92,6 +97,10 @@ func checkInvalid(t *testing.T, uf UnionFind, values ...interface{}) {
 		if got != nil {
 			t.Fatalf("unexpectd Find(%v): %v\n%s", v, got, errs.Stack(2))
 		}
+	}
+	got := uf.Find(values...)
+	if got != nil {
+		t.Fatalf("unexpectd Find(%v...): %v\n%s", values, got, errs.Stack(2))
 	}
 	for i := 1; i < len(values); i++ {
 		if uf.InSameSet(values[i-1], values[i]) {

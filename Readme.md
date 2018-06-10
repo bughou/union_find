@@ -1,5 +1,5 @@
 # union\_find
-a union find data structure based on map and list in golang.
+a union find sets data structure based on map and list in golang.
 
 [![Build Status](https://travis-ci.org/lovego/union_find.svg?branch=master)](https://travis-ci.org/lovego/union_find)
 [![Go Report Card](https://goreportcard.com/badge/github.com/lovego/union_find)](https://goreportcard.com/report/github.com/lovego/union_find)

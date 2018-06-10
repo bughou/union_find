@@ -1,3 +1,5 @@
+// +build usage
+
 package union_find
 
 import (

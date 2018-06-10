@@ -58,6 +58,49 @@ func (uf UnionFind) concat(la, lb *listPkg.List) {
 	}
 }
 
+// Find all set members of objects, with no duplicates.
+func (uf UnionFind) Find(objects ...interface{}) (result []interface{}) {
+	if len(objects) > 1 {
+		objects = uf.Distinct(objects...)
+	}
+	for i := 0; i < len(objects); i++ {
+		result = append(result, uf.find(objects[i])...)
+	}
+	return
+}
+
+func (uf UnionFind) find(object interface{}) (result []interface{}) {
+	list := uf[object]
+	if list == nil {
+		return nil
+	}
+	for e := list.Front(); e != nil; e = e.Next() {
+		result = append(result, e.Value)
+	}
+	return
+}
+
+// Distinct removes the duplicate objects in any same set.
+func (uf UnionFind) Distinct(objects ...interface{}) []interface{} {
+	result := []interface{}{objects[0]}
+	for i := 1; i < len(objects); i++ {
+		if !uf.InSameSetSlice(objects[i], result) {
+			result = append(result, objects[i])
+		}
+	}
+	return result
+}
+
+// InSameSetSlice check if object is in the same set with any member of slice.
+func (uf UnionFind) InSameSetSlice(object interface{}, slice []interface{}) bool {
+	for _, e := range slice {
+		if uf.InSameSet(object, e) {
+			return true
+		}
+	}
+	return false
+}
+
 // InSameSet check if a and b are in the same set
 func (uf UnionFind) InSameSet(a, b interface{}) bool {
 	la := uf[a]
@@ -69,16 +112,4 @@ func (uf UnionFind) InSameSet(a, b interface{}) bool {
 		return false
 	}
 	return la == lb
-}
-
-// Find all set members of object
-func (uf UnionFind) Find(object interface{}) (result []interface{}) {
-	list := uf[object]
-	if list == nil {
-		return nil
-	}
-	for e := list.Front(); e != nil; e = e.Next() {
-		result = append(result, e.Value)
-	}
-	return
 }
