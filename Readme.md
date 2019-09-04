@@ -2,7 +2,7 @@
 a union find sets data structure based on map and list in golang.
 
 [![Build Status](https://travis-ci.org/lovego/union_find.svg?branch=master)](https://travis-ci.org/lovego/union_find)
-[![Coverage Status](https://coveralls.io/repos/github/lovego/union_find/badge.svg?branch=master)](https://coveralls.io/github/lovego/union_find?branch=master)
+[![Coverage Status](https://img.shields.io/coveralls/github/lovego/union_find/master.svg)](https://coveralls.io/github/lovego/union_find?branch=master)
 [![Go Report Card](https://goreportcard.com/badge/github.com/lovego/union_find)](https://goreportcard.com/report/github.com/lovego/union_find)
 [![GoDoc](https://godoc.org/github.com/lovego/union_find?status.svg)](https://godoc.org/github.com/lovego/union_find)
 
