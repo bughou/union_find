@@ -2,7 +2,10 @@ package union_find
 
 import (
 	listPkg "container/list"
+	"sync"
 )
+
+var rwLock = new(sync.RWMutex)
 
 // UnionFindSets data structure.
 type UnionFindSets map[interface{}]*listPkg.List
@@ -23,6 +26,8 @@ func (ufs UnionFindSets) union(a, b interface{}) {
 	if a == b {
 		return
 	}
+	rwLock.Lock()
+	defer rwLock.Unlock()
 	la, lb := ufs[a], ufs[b]
 	switch {
 	case la == nil && lb == nil:
@@ -70,6 +75,8 @@ func (ufs UnionFindSets) Find(objects ...interface{}) (result []interface{}) {
 }
 
 func (ufs UnionFindSets) find(object interface{}) (result []interface{}) {
+	rwLock.RLock()
+	defer rwLock.RUnlock()
 	list := ufs[object]
 	if list == nil {
 		return nil
@@ -103,6 +110,8 @@ func (ufs UnionFindSets) InSameSetSlice(object interface{}, slice []interface{})
 
 // InSameSet check if a and b are in the same set
 func (ufs UnionFindSets) InSameSet(a, b interface{}) bool {
+	rwLock.RLock()
+	defer rwLock.RUnlock()
 	la := ufs[a]
 	if la == nil {
 		return false
@@ -116,6 +125,8 @@ func (ufs UnionFindSets) InSameSet(a, b interface{}) bool {
 
 // RemoveSet remove the set object belongs to. returns the removed set members.
 func (ufs UnionFindSets) RemoveSet(object interface{}) (result []interface{}) {
+	rwLock.Lock()
+	defer rwLock.Unlock()
 	list := ufs[object]
 	if list == nil {
 		return nil
